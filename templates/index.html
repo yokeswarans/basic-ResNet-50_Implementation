@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aperture — ResNet-50 Vision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">◍</span>
+    <span class="brand-text">APERTURE</span>
+  </div>
+  <div class="brand-sub">RESNET&#8209;50 &middot; IMAGENET&#8209;1K</div>
+</header>
+
+<main class="stage">
+
+  <section class="hero">
+    <p class="eyebrow">Convolutional vision, one exposure at a time</p>
+    <h1>See what the<br>network sees.</h1>
+    <p class="hero-copy">
+      Drop in an image link. The lens focuses, fifty layers deep, and returns
+      its best reading of the world — ranked, scored, exact.
+    </p>
+  </section>
+
+  <section class="console">
+    <div class="console-field">
+      <label for="imgUrl">Image URL</label>
+      <input id="imgUrl" type="text" placeholder="https://images.pexels.com/photos/…jpeg" autocomplete="off" />
+    </div>
+
+    <div class="console-side">
+      <div class="k-field">
+        <label for="kValue">Top&nbsp;K</label>
+        <div class="k-stepper">
+          <button type="button" class="k-btn" id="kMinus" aria-label="Decrease K">&minus;</button>
+          <input id="kValue" type="number" min="1" max="20" value="5" />
+          <button type="button" class="k-btn" id="kPlus" aria-label="Increase K">&plus;</button>
+        </div>
+      </div>
+
+      <button id="classifyBtn" class="shutter-btn">
+        <span class="shutter-ring"></span>
+        <span class="shutter-label">Classify</span>
+      </button>
+    </div>
+
+    <p id="statusLine" class="status-line"></p>
+  </section>
+
+  <section id="resultStage" class="result-stage hidden">
+
+    <div class="frame-col">
+      <div class="iris-card" id="irisCard">
+        <div class="iris-blades" id="irisBlades"></div>
+        <img id="previewImg" class="preview-img" alt="Uploaded preview" />
+        <div class="reticle">
+          <span class="reticle-corner tl"></span>
+          <span class="reticle-corner tr"></span>
+          <span class="reticle-corner bl"></span>
+          <span class="reticle-corner br"></span>
+        </div>
+      </div>
+      <p class="frame-caption">INPUT EXPOSURE</p>
+    </div>
+
+    <div class="readout-col">
+      <p class="readout-caption">TOP <span id="kEcho">5</span> READINGS</p>
+      <ol id="predictionList" class="prediction-list"></ol>
+      <p class="device-line">compute &middot; <span id="deviceEcho">—</span></p>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
